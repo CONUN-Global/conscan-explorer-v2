@@ -12,7 +12,6 @@ import styles from "./Pagination.module.scss";
 
 interface Props {
   className?: string;
-  isMobile?: boolean;
   setPage: React.Dispatch<React.SetStateAction<string>>;
   navigation: Navigation;
 }

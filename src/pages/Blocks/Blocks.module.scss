@@ -42,6 +42,8 @@
   .BlocksPage {
     & .TableCard {
       & .TableContainer {
+        padding-top: 0;
+
         & .Table {
           width: 100%;
 

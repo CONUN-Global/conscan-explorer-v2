@@ -10,14 +10,14 @@ interface Props {
 function WalletDescription({ walletStatus, loading }: Props) {
   if (loading) {
     <HStack className={styles.Description}>
-      <DescriptionCell title="TOTAL TRANSACTIONS" value={"loading..."} />
+      <DescriptionCell title="TOTAL TXNS" value={"loading..."} />
       <DescriptionCell title="BALANCE" value={"loading..."} />
       <DescriptionCell title="CONX VALUE" value={"loading..."} />
     </HStack>;
   }
   return (
     <HStack className={styles.Description}>
-      <DescriptionCell title="TOTAL TRANSACTIONS" value={walletStatus} />
+      <DescriptionCell title="TOTAL TXNS" value={walletStatus} />
       <DescriptionCell
         title="BALANCE"
         value={`${FormatValue("500000000")} CONX`}

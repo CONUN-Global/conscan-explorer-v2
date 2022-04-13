@@ -60,7 +60,6 @@ function Blocks({ channelHash, latestBlocks }: Props) {
           >
             <Pagination
               setPage={setPage}
-              isMobile={isMobile}
               className={styles.PaginationButtons}
               navigation={navigation}
             />

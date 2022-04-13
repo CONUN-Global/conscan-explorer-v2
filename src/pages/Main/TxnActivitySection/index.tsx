@@ -52,16 +52,16 @@ function TxnActivitySection({ channelHash }: { channelHash: string }) {
                     variant="dark-grey"
                     hash={txns.txhash}
                     time={txns.createdt}
-                    hashLeft={isMobile ? 5 : 8}
-                    hashRight={isMobile ? 4 : 8}
+                    hashLeft={isMobile ? 5 : 7}
+                    hashRight={isMobile ? 4 : 7}
                     idString={txns.id}
                     className={styles.HashCell}
                   />
                   <FromToTxnCell
                     from={txns.tx_from}
                     to={txns.tx_to}
-                    leftHash={isMobile ? 6 : 10}
-                    rightHash={isMobile ? 4 : 10}
+                    leftHash={isMobile ? 6 : 7}
+                    rightHash={isMobile ? 4 : 7}
                     isMobile={isMobile}
                   />
                   <ActionCell

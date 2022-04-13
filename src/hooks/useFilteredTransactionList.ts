@@ -5,7 +5,7 @@ import useChannelHash from "./useChannelHash";
 function useFilteredTransactionList(
   dataRole: string,
   param: string,
-  txnId: number
+  txnId: string
 ) {
   const { channelHash } = useChannelHash();
 

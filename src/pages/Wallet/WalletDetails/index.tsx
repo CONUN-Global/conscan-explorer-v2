@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import useStore from "@/store/store";
 import Address from "./Address";
 import WalletDescription from "./WalletDescription/";
@@ -30,10 +30,10 @@ function WalletDetails({ txnsList, channelHash, walletAddress }: Props) {
     channelHash,
     walletAddress
   );
-
-  const [currentPage, setCurrentPage] = useState<number>(txnsList[0]?.id);
   const [activeTab, setActiveTab] = useState<string>("txns");
-
+  const [page, setPage] = useState<string>(
+    localStorage.getItem("page") || txnsList[0]?.id?.toString()
+  );
   const isMobile = useStore((state) => state.isMobile);
   const refWidth = useRef<HTMLDivElement>(null);
   const size = useWidthDetect(refWidth);
@@ -44,25 +44,14 @@ function WalletDetails({ txnsList, channelHash, walletAddress }: Props) {
     { tabId: "code", label: "Code" },
   ];
   const { listOfTransactions, loadingTransactionsList } =
-    useFilteredTransactionList("wallet", walletAddress, currentPage);
-
-  useEffect(() => {
-    if (txnsList.length > 0) {
-      setCurrentPage(txnsList[0]?.id);
-    }
-  }, [walletAddress, txnsList]);
-
-  const handleLatest = () => {
-    setCurrentPage(txnsList[0]?.id);
+    useFilteredTransactionList("wallet", walletAddress, page);
+  const navigation = {
+    initial: Number(page),
+    prevSteps: 5,
+    nextSteps: 5,
+    latestPage: txnsList[0]?.id,
   };
 
-  const handlePrev = () => {
-    setCurrentPage((prev) => prev + 5);
-  };
-
-  const handleNext = () => {
-    setCurrentPage((prev) => prev - 5);
-  };
   let loadTabData;
   if (activeTab === "txns") {
     loadTabData = (
@@ -79,9 +68,8 @@ function WalletDetails({ txnsList, channelHash, walletAddress }: Props) {
         {isMobile && (
           <Pagination
             className={styles.MobilePagination}
-            handleLatest={handleLatest}
-            handlePrev={handlePrev}
-            handleNext={handleNext}
+            setPage={setPage}
+            navigation={navigation}
           />
         )}
       </Table>
@@ -90,7 +78,7 @@ function WalletDetails({ txnsList, channelHash, walletAddress }: Props) {
   if (activeTab === "details") {
     loadTabData = (
       <Table className={styles.DetailsTab}>
-        <Address walletAddress={walletAddress} />
+        {hasMounted && <Address walletAddress={walletAddress} />}
         <WalletDescription
           loading={isLoading}
           walletStatus={walletStatus?.tx_count}
@@ -133,11 +121,7 @@ function WalletDetails({ txnsList, channelHash, walletAddress }: Props) {
               activeTab={activeTab}
             />
             {!isMobile && (
-              <Pagination
-                handleLatest={handleLatest}
-                handlePrev={handlePrev}
-                handleNext={handleNext}
-              />
+              <Pagination setPage={setPage} navigation={navigation} />
             )}
           </div>
           <div className={styles.WalletDetailContainer} ref={refWidth}>

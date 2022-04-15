@@ -10,7 +10,7 @@ import styles from "./Main.module.scss";
 
 function Main({ channelHash }: { channelHash: string }) {
   useWebSocket(channelHash);
-  console.log(channelHash);
+
   return (
     <div className={styles.Container}>
       <HStack className={styles.SubStatsTop}>

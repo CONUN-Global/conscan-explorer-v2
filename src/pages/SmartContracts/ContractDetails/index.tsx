@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import useStore from "@/store/store";
 import ContractDescription from "./ContractDescription";
 import ContractTxnsTab from "./ContractTxnsTab";
@@ -25,10 +25,11 @@ interface Props {
 }
 
 function ContractDetails({ contracts, contractName, txnsList }: Props) {
-  console.log("txnsList", txnsList[0]?.id);
   const [activeTab, setActiveTab] = useState<string>("");
 
-  const [page, setPage] = useState<string>(txnsList[0]?.id?.toString());
+  const [page, setPage] = useState<string>(
+    localStorage.getItem("page") || txnsList[0]?.id?.toString()
+  );
   const refWidth = useRef<HTMLDivElement>(null);
   const size = useWidthDetect(refWidth);
   const isMobile = useStore((state) => state.isMobile);
@@ -42,14 +43,9 @@ function ContractDetails({ contracts, contractName, txnsList }: Props) {
   const contractFound = contracts.chaincode.find(
     (contract) => contract.chaincodename === contractName
   );
+
   const { listOfTransactions, loadingTransactionsList } =
     useFilteredTransactionList("contract", contractName, page);
-
-  useEffect(() => {
-    setPage(txnsList[0]?.id?.toString());
-
-    // console.log(contractName, page, "-", listOfTransactions);
-  }, [txnsList[0]?.id]);
 
   const navigation = {
     initial: Number(page),

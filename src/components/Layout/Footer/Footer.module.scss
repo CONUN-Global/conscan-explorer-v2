@@ -55,15 +55,21 @@
       }
     }
 
-    & .Version {
-      font-size: 0.8rem;
+    & .ScrollUpContainer {
+      display: flex;
+
+      & .ScrollUpIcon {
+        margin-top: -21px;
+        width: 50px;
+      }
     }
   }
 }
 @media only screen and (max-width: 800px) {
   .FooterPage {
     background-position: bottom right;
-    padding: 30px 0;
+    padding-bottom: 20px;
+    padding-top: 30px;
 
     & .FooterItems {
       width: 90%;
@@ -75,18 +81,32 @@
       flex-direction: row;
       font-size: 0.8rem;
       justify-content: space-between;
-      padding-top: 20px;
 
       & .LogoContainer {
+        align-items: flex-end;
         display: flex;
         gap: 10px;
+        padding-top: 20px;
 
         & .Logo {
           width: 50px;
         }
 
         & .CopyRight {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
           width: 200px;
+        }
+
+        & .ScrollIconContainer {
+          align-items: flex-end;
+          display: flex;
+          flex-direction: column;
+
+          & .ScrollUp {
+            width: 30px;
+          }
         }
       }
     }

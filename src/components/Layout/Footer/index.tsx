@@ -2,8 +2,9 @@ import React from "react";
 import Link from "next/link";
 import useStore from "@/store/store";
 import { COMUMUNITY, SOLUTIONS, COMPANY } from "../../../const";
-
+import Button from "@/components/Button";
 import Logo from "@/assets/icons/conunLogoFooter.svg";
+import ScrollUp from "@/assets/icons/scroll-up.svg";
 import styles from "./Footer.module.scss";
 
 function Footer() {
@@ -15,7 +16,18 @@ function Footer() {
         <div>© 2021 CONUN</div>
         <div>Connecting on Universal Networks</div>
       </div>
-      {isMobile && <div>CONSCAN V.2.0.0</div>}
+      {isMobile && (
+        <div className={styles.ScrollIconContainer}>
+          <Button
+            variant="ghost"
+            className={styles.ScrollUp}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <ScrollUp />
+          </Button>
+          <p>CONSCAN V.2.0.0</p>
+        </div>
+      )}
     </div>
   );
 
@@ -50,7 +62,18 @@ function Footer() {
             </Link>
           ))}
         </div>
-        {!isMobile && <div>CONSCAN V.2.0.0</div>}
+        {!isMobile && (
+          <div className={styles.ScrollUpContainer}>
+            <p>CONSCAN V.2.0.0</p>
+            <Button
+              variant="ghost"
+              className={styles.ScrollUpIcon}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              <ScrollUp />
+            </Button>
+          </div>
+        )}
       </div>
       {isMobile && (
         <div className={styles.MobileContainer}>{logoAndCopyRight}</div>

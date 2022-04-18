@@ -26,7 +26,10 @@ interface Props {
 
 function ContractDetails({ contracts, contractName, txnsList }: Props) {
   const [activeTab, setActiveTab] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState<number>(txnsList[0]?.id);
+
+  const [page, setPage] = useState<string>(
+    localStorage.getItem("page") || txnsList[0]?.id?.toString()
+  );
   const refWidth = useRef<HTMLDivElement>(null);
   const size = useWidthDetect(refWidth);
   const isMobile = useStore((state) => state.isMobile);
@@ -37,24 +40,20 @@ function ContractDetails({ contracts, contractName, txnsList }: Props) {
     { tabId: "code", label: "Code" },
   ];
 
-  const { listOfTransactions, loadingTransactionsList } =
-    useFilteredTransactionList("contract", contractName, currentPage);
-
   const contractFound = contracts.chaincode.find(
     (contract) => contract.chaincodename === contractName
   );
 
-  const handleLatest = () => {
-    setCurrentPage(txnsList[0]?.id);
+  const { listOfTransactions, loadingTransactionsList } =
+    useFilteredTransactionList("contract", contractName, page);
+
+  const navigation = {
+    initial: Number(page),
+    prevSteps: 5,
+    nextSteps: 5,
+    latestPage: txnsList[0]?.id,
   };
 
-  const handlePrev = () => {
-    setCurrentPage((prev) => prev + 5);
-  };
-
-  const handleNext = () => {
-    setCurrentPage((prev) => prev - 5);
-  };
   let loadTabData;
   if (activeTab === "txns") {
     loadTabData = (
@@ -71,9 +70,8 @@ function ContractDetails({ contracts, contractName, txnsList }: Props) {
         {isMobile && (
           <Pagination
             className={styles.MobilePagination}
-            handleLatest={handleLatest}
-            handlePrev={handlePrev}
-            handleNext={handleNext}
+            setPage={setPage}
+            navigation={navigation}
           />
         )}
       </Table>
@@ -99,7 +97,7 @@ function ContractDetails({ contracts, contractName, txnsList }: Props) {
     );
   }
   return (
-    <VStack className={styles.DrivePage}>
+    <VStack className={styles.ContractPage}>
       <Box
         position="start"
         bottomLine={false}
@@ -108,7 +106,7 @@ function ContractDetails({ contracts, contractName, txnsList }: Props) {
         title={toCapitalize(contractName)}
       />
 
-      <div className={styles.DrivePageContainer} ref={refWidth}>
+      <div className={styles.ContractPageContainer} ref={refWidth}>
         {contractFound && !isMobile && (
           <ContractDescription contract={contractFound} />
         )}
@@ -120,11 +118,7 @@ function ContractDetails({ contracts, contractName, txnsList }: Props) {
             activeTab={activeTab}
           />
           {!isMobile && (
-            <Pagination
-              handleLatest={handleLatest}
-              handlePrev={handlePrev}
-              handleNext={handleNext}
-            />
+            <Pagination setPage={setPage} navigation={navigation} />
           )}
         </Box>
         <VStack>

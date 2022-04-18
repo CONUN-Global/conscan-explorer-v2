@@ -78,5 +78,5 @@ export type Navigation = {
   prevSteps: number;
   nextSteps: number;
   latestPage: number;
-  oldestPage: number;
+  oldestPage?: number;
 };

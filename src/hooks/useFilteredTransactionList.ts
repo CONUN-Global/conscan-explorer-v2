@@ -5,13 +5,12 @@ import useChannelHash from "./useChannelHash";
 function useFilteredTransactionList(
   dataRole: string,
   param: string,
-  txnId: number
+  txnId: string
 ) {
   const { channelHash } = useChannelHash();
-
   const { data: listOfTransactions, isLoading: loadingTransactionsList } =
     useQuery(
-      ["contract-transactions", dataRole, txnId],
+      [dataRole, param, txnId],
       async () => {
         const response = await instance.get(
           dataRole === "wallet"

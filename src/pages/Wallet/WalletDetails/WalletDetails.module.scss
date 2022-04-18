@@ -8,6 +8,10 @@
   height: 720px;
   width: 100%;
 
+  @media only screen and (max-width: 1024px) {
+    max-height: 606px;
+  }
+
   & .TitleBox {
     align-self: flex-start;
     justify-content: flex-start;
@@ -21,7 +25,12 @@
     padding-top: 45px;
     width: 87%;
 
+    @media only screen and (max-width: 1024px) {
+      padding-top: 10px;
+    }
+
     & .WalletDetailContainer {
+      position: relative;
       width: 100%;
 
       & .MobilePagination {

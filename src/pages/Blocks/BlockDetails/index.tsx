@@ -32,7 +32,7 @@ function BlockDetails({
   const isMobile = useStore((state) => state.isMobile);
   const channelStatistics = useChannelStatistics(channelHash);
 
-  const { isLoading, dataDetails } = useActivityDetailsData(
+  const { isLoading, dataDetails, isError } = useActivityDetailsData(
     channelHash,
     page,
     "block/transactions"
@@ -86,7 +86,7 @@ function BlockDetails({
         </Box>
 
         <VStack className={styles.Table}>
-          {isLoading || dataDetails.error ? (
+          {isLoading || isError ? (
             <SkeletonTable loading={isLoading} row={7} />
           ) : (
             <Table>
@@ -109,7 +109,9 @@ function BlockDetails({
                 {dataDetails?.data?.prehash}
               </DetailRow>
               <DetailRow title="Transaction">
-                {dataDetails?.data?.txhash[0].toString()}
+                {dataDetails?.data?.txhash == null
+                  ? ""
+                  : dataDetails?.data?.txhash[0].toString()}
               </DetailRow>
             </Table>
           )}

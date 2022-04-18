@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useStore from "@/store/store";
 import ContractDescription from "./ContractDescription";
 import ContractTxnsTab from "./ContractTxnsTab";
@@ -21,18 +21,19 @@ import styles from "./ContractDetails.module.scss";
 interface Props {
   contracts: contractData;
   contractName: string;
-  txnsList: Array<TxnActivityDataType>;
+  txnsList: TxnActivityDataType[];
 }
 
 function ContractDetails({ contracts, contractName, txnsList }: Props) {
   const [activeTab, setActiveTab] = useState<string>("");
-
-  const [page, setPage] = useState<string>(
-    localStorage.getItem("page") || txnsList[0]?.id?.toString()
-  );
+  const [page, setPage] = useState<string>(txnsList[0]?.id?.toString());
   const refWidth = useRef<HTMLDivElement>(null);
   const size = useWidthDetect(refWidth);
   const isMobile = useStore((state) => state.isMobile);
+
+  useEffect(() => {
+    setPage(txnsList[0]?.id?.toString());
+  }, [txnsList]);
 
   const TABS_ITEMS = [
     { tabId: "desc", label: "Description" },

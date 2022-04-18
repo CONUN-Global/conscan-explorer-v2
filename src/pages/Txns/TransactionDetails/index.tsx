@@ -35,11 +35,12 @@ function TransactionDetails({
 }) {
   const [page, setPage] = useState(txnHash);
 
-  const { isLoading, dataDetails } = useActivityDetailsData(
+  const { isLoading, dataDetails, isError } = useActivityDetailsData(
     channelHash,
     page,
     "transaction"
   );
+  console.log("data details", dataDetails);
   const isMobile = useStore((state) => state.isMobile);
   useEffect(() => {
     setPage(txnHash);
@@ -73,7 +74,7 @@ function TransactionDetails({
           )}
         </Box>
         <VStack className={styles.Table}>
-          {isLoading || dataDetails.error ? (
+          {isLoading || isError ? (
             <SkeletonTable loading={isLoading} row={9} />
           ) : (
             <Table>
@@ -82,7 +83,7 @@ function TransactionDetails({
               </DetailRow>
               <DetailRow title="Timestamp">{`${getTimeDistance(
                 dataDetails?.row?.createdt
-              )} [${getLocalTime(dataDetails?.row?.createdt)}]`}</DetailRow>
+              )} [${getLocalTime(dataDetails?.createdt)}]`}</DetailRow>
               <DetailRow title="Validity">
                 <ValidityIcon validity={dataDetails?.row?.validation_code} />
               </DetailRow>

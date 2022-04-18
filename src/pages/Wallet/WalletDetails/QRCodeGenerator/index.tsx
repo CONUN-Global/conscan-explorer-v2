@@ -7,16 +7,20 @@ import Box from "@/components/Box";
 import Button from "@/components/Button";
 import QRIcon from "@/assets/icons/qr_icon.svg";
 import styles from "./QRCodeGenerator.module.scss";
-
+interface Props {
+  walletQR: string;
+  className?: string;
+  toggleQR: boolean;
+  toggleQrCode: () => void;
+}
 function QRCodeGenerator({
   walletQR,
   className,
-}: {
-  walletQR: string;
-  className?: string;
-}) {
+  toggleQR,
+  toggleQrCode,
+}: Props) {
   const [src, setSrc] = useState("");
-  const [toggleQR, setToggleQR] = useState(false);
+  // const [toggleQR, setToggleQR] = useState(false);
 
   useEffect(() => {
     async function generateQR() {
@@ -35,7 +39,8 @@ function QRCodeGenerator({
   return (
     <Button
       variant="ghost"
-      onClick={() => setToggleQR((prev) => !prev)}
+      onClick={toggleQrCode}
+      // onClick={() => setToggleQR((prev) => !prev)}
       className={classNames(styles.QRContainer, className)}
     >
       <QRIcon className={styles.QRIcon} />

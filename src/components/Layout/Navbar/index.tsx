@@ -28,9 +28,9 @@ function Navbar() {
   return (
     <div className={styles.Header}>
       <div className={styles.Navbar}>
-        <div className={styles.Logo}>
+        <div className={styles.LogoContainer}>
           <Link href="/">
-            <a>
+            <a className={styles.Logo}>
               <ConunLogoDark />
             </a>
           </Link>
@@ -43,7 +43,7 @@ function Navbar() {
             selectLanguage={selectLanguage}
           />
         ) : (
-          <div className={isDropdownOpen ? styles.MenuDown : styles.MenuUp}>
+          <div>
             <MenuDrawer open={isDropdownOpen} />
             <MenuToggle toggleClick={handleDropdown} />
             {isDropdownOpen && (

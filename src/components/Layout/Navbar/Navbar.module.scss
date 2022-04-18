@@ -14,18 +14,14 @@
       width: 90%;
     }
 
-    & .Logo {
-      width: 10rem;
+    & .LogoContainer {
+      align-items: center;
+      display: flex;
+      height: 80px;
+
+      & .Logo {
+        width: 150px;
+      }
     }
-  }
-
-  & .MenuDown {
-    height: 80px;
-  }
-
-  & .MenuUp {
-    align-items: center;
-    display: flex;
-    height: 80px;
   }
 }

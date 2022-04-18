@@ -4,10 +4,12 @@ interface Props {
 }
 function MenuToggle({ toggleClick }: Props) {
   return (
-    <div onClick={toggleClick} className={styles.MenuToggle}>
-      <div className={styles.HamburgerButton}></div>
-      <div className={styles.HamburgerButton}></div>
-      <div className={styles.HamburgerButton}></div>
+    <div className={styles.MenuToggleContainer}>
+      <div onClick={toggleClick} className={styles.MenuToggle}>
+        <div className={styles.HamburgerButton}></div>
+        <div className={styles.HamburgerButton}></div>
+        <div className={styles.HamburgerButton}></div>
+      </div>
     </div>
   );
 }

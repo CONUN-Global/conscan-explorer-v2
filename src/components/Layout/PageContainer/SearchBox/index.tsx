@@ -15,13 +15,13 @@ function SearchBox() {
     event.preventDefault();
 
     const refValue = inputRef?.current?.value;
-    const numInputRex = /^\d+$/;
-    const hashRex = /^0x([A-Fa-f0-9]{64})$/;
+    const blockNumberInput = /^\d+$/;
+    const txnsHashInput = /([A-Fa-f0-9]{64})$/;
     if (refValue?.startsWith("0x") && refValue.length > 2) {
       router.push(`/wallet/${refValue}`);
-    } else if (refValue && refValue.match(numInputRex)) {
+    } else if (refValue && refValue.match(blockNumberInput)) {
       router.push(`/blocks/${refValue}`);
-    } else if (refValue && refValue.match(hashRex)) {
+    } else if (refValue && refValue.match(txnsHashInput)) {
       router.push({ pathname: `/txns/${refValue}` });
     } else {
       router.push({

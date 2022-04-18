@@ -51,7 +51,7 @@ function Txns({ channelHash, latestTxns }: Props) {
         {isMobile ? (
           <MobileTableHeader
             header="Recent Transactions"
-            headTitles={["TXN Information", "From/To", "Action"]}
+            headTitles={["Transaction Information", "From/To", "Action"]}
           />
         ) : (
           <Box
@@ -62,7 +62,6 @@ function Txns({ channelHash, latestTxns }: Props) {
           >
             <Pagination
               setPage={setPage}
-              isMobile={isMobile}
               className={styles.PaginationButtons}
               navigation={navigation}
             />
@@ -83,16 +82,10 @@ function Txns({ channelHash, latestTxns }: Props) {
                   >
                     <Button
                       variant="ghost"
-                      onClick={() => router.push(`/txns/${txns.txhash}`)}
-                      className={styles.CellIcon}
-                    >
-                      <ContractIcon contractName={txns?.chaincodename} />
-                    </Button>
-                    <Button
-                      variant="ghost"
                       className={styles.HashCell}
                       onClick={() => router.push(`/txns/${txns.txhash}`)}
                     >
+                      <ContractIcon contractName={txns?.chaincodename} />
                       <HashTimeCell
                         variant="green"
                         identicon
@@ -124,7 +117,6 @@ function Txns({ channelHash, latestTxns }: Props) {
                 <Pagination
                   className={styles.MobilePaginationButtons}
                   setPage={setPage}
-                  isMobile={isMobile}
                   navigation={navigation}
                 />
               )}

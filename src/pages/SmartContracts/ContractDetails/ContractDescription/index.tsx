@@ -52,7 +52,7 @@ function Section({
           {title === "TYPE" ? (
             <ContractIcon contractName={data} />
           ) : (
-            <div>{data}</div>
+            <div>{data.charAt(0).toUpperCase() + data.slice(1)}</div>
           )}
 
           {title === "TITLE" && (

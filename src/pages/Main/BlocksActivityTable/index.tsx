@@ -40,7 +40,7 @@ function BlocksActivityTable({ channelHash }: { channelHash: string }) {
       )}
 
       <div className={styles.ViewBlocks}>
-        <Button link={"/blocks/"}>View More Blocks</Button>
+        <Button link={"/blocks/"}>VIEW MORE BLOCKS</Button>
       </div>
     </VStack>
   );

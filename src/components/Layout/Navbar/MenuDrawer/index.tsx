@@ -1,5 +1,6 @@
+import Link from "next/link";
 import classNames from "classnames";
-import Link from "next/dist/client/link";
+
 import { PAGES_MAIN, PAGES_SMARTCONTRACT, LOCALES } from "src/const";
 
 import useToggle from "@/hooks/useToggle";
@@ -14,9 +15,11 @@ function MenuDrawer({ open }: { open: boolean }) {
   const [languageToggle, setLanguageToggle] = useToggle(false);
   return (
     <div className={classNames(styles.MenuDrawer, { [styles.open]: open })}>
-      <div className={styles.Logo}>
-        <ConunLogoLight />
-      </div>
+      <Link href="/">
+        <a className={styles.Logo}>
+          <ConunLogoLight />
+        </a>
+      </Link>
       <div className={styles.ListContainer}>
         <div className={styles.List}>
           <div className={styles.ListItem}>

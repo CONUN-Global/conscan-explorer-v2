@@ -51,7 +51,6 @@ const StatsGraph = ({ data, width, height }: Props) => {
           fill="url(#colorTransactions)"
           fillOpacity={1}
           baseLine={0}
-          dot={{ strokeWidth: 0, fill: "#5AE2E2" }}
         />
 
         <Tooltip />

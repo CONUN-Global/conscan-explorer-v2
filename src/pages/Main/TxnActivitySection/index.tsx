@@ -78,7 +78,7 @@ function TxnActivitySection({ channelHash }: { channelHash: string }) {
       )}
 
       <div className={styles.ViewBlocks}>
-        <Button link={"/txns/"}>View More Transaction</Button>
+        <Button link={"/txns/"}>VIEW MORE TRANSACTIONS</Button>
       </div>
     </VStack>
   );

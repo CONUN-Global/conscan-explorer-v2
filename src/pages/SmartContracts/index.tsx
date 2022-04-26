@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TimeStamp from "@/components/TimeStamp";
 import VStack from "@/components/VStack";
 import Box from "@/components/Box";
@@ -73,7 +74,11 @@ function SmartContract({ status, chaincode }: Props) {
         </VStack>
       </VStack>
 
-      <div className={styles.Github}>READ MORE ON GITHUB</div>
+      <Link href="https://github.com/CONUN-Global/conscan-explorer-v2.git">
+        <a className={styles.Github} target="_blank">
+          READ MORE ON GITHUB
+        </a>
+      </Link>
     </VStack>
   );
 }
